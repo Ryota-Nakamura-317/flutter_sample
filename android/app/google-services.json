@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "798940986729",
+    "firebase_url": "https://flutter-test-a7e30-default-rtdb.firebaseio.com",
+    "project_id": "flutter-test-a7e30",
+    "storage_bucket": "flutter-test-a7e30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798940986729:android:1c271635adfe215a3691f8",
+        "android_client_info": {
+          "package_name": "net.rita.flutter_test1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798940986729-6vtjgl4m4u609bl4cbs5tu4jbsng775f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe7gdNDVmNR6SWUUJveNl-W-Jn_LG7mEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798940986729-6vtjgl4m4u609bl4cbs5tu4jbsng775f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "798940986729-j2582lp4hcdvjcsdtshans922alosm6m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.rita.flutterTest1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
