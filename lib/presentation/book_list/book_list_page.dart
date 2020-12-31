@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test1/book_list_model.dart';
+import 'package:flutter_test1/presentation/add_book/add_book_page.dart';
+import 'package:flutter_test1/presentation/book_list/book_list_model.dart';
 import 'package:provider/provider.dart';
 
 class BookListPage extends StatelessWidget {
@@ -23,6 +24,24 @@ class BookListPage extends StatelessWidget {
                 .toList();
             return ListView(
               children: listTiles,
+            );
+          },
+        ),
+        floatingActionButton: Consumer<BookListModel>(
+          builder: (context, model, child) {
+            return FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () async {
+                //todo
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddBookPage(),
+                    fullscreenDialog: true,
+                  ),
+                );
+                model.fetchBooks();
+              },
             );
           },
         ),
