@@ -18,35 +18,69 @@ class AddBookPage extends StatelessWidget {
 
     return ChangeNotifierProvider<AddBookModel>(
       create: (_) => AddBookModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(isUpdate ? '本を編集' : '本を追加'),
-        ),
-        body: Consumer<AddBookModel>(
-          builder: (context, model, child) {
-            return Column(
-              children: <Widget>[
-                TextField(
-                  controller: textEditingController,
-                  onChanged: (text) {
-                    model.bookTitle = text;
-                  },
-                ),
-                RaisedButton(
-                  child: Text(isUpdate ? '更新する' : '追加する'),
-                  onPressed: () async {
-                    if (isUpdate) {
-                      await updateBook(model, context);
-                    } else {
-                      //firestoreに本を追加
-                      await addBook(model, context);
-                    }
-                  },
-                ),
-              ],
-            );
-          },
-        ),
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              title: Text(isUpdate ? '本を編集' : '本を追加'),
+            ),
+            body: Consumer<AddBookModel>(
+              builder: (context, model, child) {
+                return Column(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 100,
+                      height: 160,
+                      child: InkWell(
+                        onTap: () async {
+                          await model.showImagePicker();
+                        },
+                        child: model.imageFile != null
+                            ? Image.file(model.imageFile)
+                            : Container(
+                                color: Colors.grey,
+                              ),
+                      ),
+                    ),
+                    TextField(
+                      controller: textEditingController,
+                      onChanged: (text) {
+                        model.bookTitle = text;
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(isUpdate ? '更新する' : '追加する'),
+                      onPressed: () async {
+                        //ローディング画面の判定
+                        model.startLoading();
+
+                        if (isUpdate) {
+                          await updateBook(model, context);
+                        } else {
+                          //firestoreに本を追加
+                          await addBook(model, context);
+                        }
+                        //ローディング画面の判定
+                        model.endLoading();
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          Consumer<AddBookModel>(builder: (context, model, child) {
+            //loadingUI
+            return model.isLoading
+                ? Container(
+                    color: Colors.grey.withOpacity(0.7),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : SizedBox();
+          }),
+        ],
       ),
     );
   }
